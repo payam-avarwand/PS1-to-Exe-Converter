@@ -17,7 +17,7 @@
 
 ## 🪟 How to Use
 
-1. **Download** the latest `PS1 to Exe Converter.exe` from the [Releases](../../releases) section.
+1. **Download** the latest `PS1 to Exe Converter.exe` from the [Releases](https://github.com/payam-avarwand/PS1-to-Exe-Converter/releases/tag/Powershell2Exe) section.
 2. **Double-click** the `.exe` file to launch the application.
 3. **Follow the GUI prompts** to:
    - Select your `.ps1` script
