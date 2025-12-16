@@ -1,12 +1,12 @@
 #define MyAppName "PS1 to Exe Converter"
 #define MyAppVersion "1.0"
 #define MyAppPublisher "Avarwand"
-#define MyAppURL "https://github.com/payam-avarwand/PS1-to-Exe-Converter/releases/tag/Powershell2Exe"
+#define MyAppURL "https://github.com/payam-avarwand/PS1-to-Exe-Converter/releases/edit/Powershell2Exe"
 #define MyAppExeName "PS1 to Exe Converter 1.0 - portable.exe"
-#define MyAppIcon "D:\Payam Avarwand\My Repos\GitHub\Avarwand\PS1 to Exe Converter\installer\PS1 to Exe Converter.ico"
+#define MyAppIcon "D:\Payam Avarwand\My Repos\GitHub\Word-Books\Code\Avarwand Software Production\6- PS1 to Exe Converter\Visual\PS1 to Exe Converter.ico"
 #define MyVbsLauncher "PS1 to Exe Converter_Launcher.vbs"
 #define MyAppIconName "PS1 to Exe Converter.ico"
-#define MyAppFileVersion "1.0.0.40"
+#define MyAppFileVersion "1.0.2.57"
 
 [Setup]
 AppId={{PS1_to_Exe_Converter.com.yahoo@Avar_Payam}
@@ -20,8 +20,8 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\Avarwand\{#MyAppName}
 DefaultGroupName={#MyAppName}
-UninstallDisplayIcon={app}\icons\{#MyAppIconName}
-OutputDir="D:\Payam Avarwand\My Repos\GitHub\Avarwand\PS1 to Exe Converter\installer"
+UninstallDisplayIcon={app}\lib\{#MyAppIconName}
+OutputDir="D:\Payam Avarwand\My Repos\GitHub\Avarwand\Software\PS1 to Exe Converter\installer"
 OutputBaseFilename={#MyAppName}-{#MyAppVersion}-Setup
 SetupIconFile={#MyAppIcon}
 SolidCompression=yes
@@ -39,13 +39,16 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\Payam Avarwand\My Repos\GitHub\Avarwand\PS1 to Exe Converter\installer\PS1 to Exe Converter 1.0 - portable.exe"; DestDir: "{app}\icons"; Flags: ignoreversion
-Source: "{#MyAppIcon}"; DestDir: "{app}\icons"; Flags: ignoreversion
+Source: "D:\Payam Avarwand\My Repos\GitHub\Avarwand\Software\PS1 to Exe Converter\installer\PS1 to Exe Converter 1.0 - portable.exe"; DestDir: "{app}\lib"; Flags: ignoreversion
+Source: "{#MyAppIcon}"; DestDir: "{app}\lib"; Flags: ignoreversion
+
+
+
 
 [Icons]
 ; VBS launcher
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyVbsLauncher}"; IconFilename: "{app}\icons\{#MyAppIconName}"
-Name: "{autodesktop}\{#MyAppName} {#MyAppVersion}"; Filename: "{app}\{#MyVbsLauncher}"; Tasks: desktopicon; IconFilename: "{app}\icons\{#MyAppIconName}"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyVbsLauncher}"; IconFilename: "{app}\lib\{#MyAppIconName}"
+Name: "{autodesktop}\{#MyAppName} {#MyAppVersion}"; Filename: "{app}\{#MyVbsLauncher}"; Tasks: desktopicon; IconFilename: "{app}\lib\{#MyAppIconName}"
 
 [Run]
 Filename: "{app}\{#MyVbsLauncher}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: shellexec postinstall skipifsilent
@@ -65,7 +68,7 @@ begin
       'Set fso = CreateObject("Scripting.FileSystemObject")' + #13#10 +
       'Set shell = CreateObject("WScript.Shell")' + #13#10 +
       'appPath = fso.GetParentFolderName(WScript.ScriptFullName)' + #13#10 +
-      'exePath = appPath & "\icons\{#MyAppExeName}"' + #13#10 +
+      'exePath = appPath & "\lib\{#MyAppExeName}"' + #13#10 +
       'If fso.FileExists(exePath) Then' + #13#10 +
       '  shell.Run Chr(34) & exePath & Chr(34), 1, False' + #13#10 +
       'Else' + #13#10 +
@@ -75,11 +78,11 @@ begin
     SaveStringToFile(VbsPath, VbsContent, False);
 
     // make the script hide and read-only
-    Exec('cmd.exe', '/C attrib +h +r +s "' + ExpandConstant('{app}\icons\{#MyAppExeName}') + '"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
-    // Protect all files in the icons folder
-    Exec('cmd.exe', '/C attrib +h +r +s "' + ExpandConstant('{app}\icons\*.*') + '" /S', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
-    // Protect the icons folder itself
-    Exec('cmd.exe', '/C attrib +h +r +s "' + ExpandConstant('{app}\icons') + '"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+    Exec('cmd.exe', '/C attrib +h +r +s "' + ExpandConstant('{app}\lib\{#MyAppExeName}') + '"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+    // Protect all files in the lib folder
+    Exec('cmd.exe', '/C attrib +h +r +s "' + ExpandConstant('{app}\lib\*.*') + '" /S', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+    // Protect the lib folder itself
+    Exec('cmd.exe', '/C attrib +h +r +s "' + ExpandConstant('{app}\lib') + '"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
 
     // Check if VBS file was created
     if not FileExists(VbsPath) then
@@ -107,9 +110,6 @@ begin
     end;
   end;
 end;
-
-
-
 
 
 
